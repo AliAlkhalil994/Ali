@@ -7,6 +7,7 @@ public class Network {
 
     public Network(String name){
         this.name = name;
+        this.network = new ArrayList<Component>();
     }
 
     public Network(String name, ArrayList<Component> network) {
@@ -15,15 +16,43 @@ public class Network {
     }
 
     public void addComponent(Component component){
-        network.add(component);
+        this.network.add(component);
     }
 
     public double CalculatePrice(){
-        return 0.00;
+
+        double maxPrice = 4000;
+
+        for(Component c : network){
+
+            if(c.getType().equals("wbs") || c.getType().equals("dbs")){
+
+                maxPrice += c.getPrice();
+
+            }
+
+        }
+
+        return maxPrice;
     }
 
-    public double CalculateUptime(){
-        return 0.00;
+    public double CalculateUptime(String type){
+
+        double uptime = 1;
+
+        for(Component c : network){
+
+            if(c.getType().equals("wbs")){
+
+
+
+            }else if(c.getType().equals("dbs")){
+
+            }
+
+        }
+
+        return uptime;
     }
 
     public ArrayList<Component> getNetwork(){

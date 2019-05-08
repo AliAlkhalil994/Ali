@@ -7,7 +7,5 @@ public class Optimize {
         this.network = network;
         this.requiredUptime = requiredUptime;
 
-
-
     }
 }
