@@ -6,6 +6,9 @@ public class Optimize {
     public Optimize(Network network, double requiredUptime) {
         this.network = network;
         this.requiredUptime = requiredUptime;
+    }
 
+    public Network getNetwork() {
+        return network;
     }
 }
