@@ -30,7 +30,6 @@ public class MainScreen extends JFrame implements ActionListener {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         //setUndecorated(true);
 
-
         //menu config
         //The menu bar.
         menuBar = new JMenuBar();
