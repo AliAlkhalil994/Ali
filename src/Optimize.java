@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Optimize {
@@ -5,41 +6,36 @@ public class Optimize {
     private Network network;
     private double requiredUptime;
     private Network optimizeConfig;
+    private ArrayList<Component> setupComponents;
+    private Random random;
 
     public Optimize(Network network, double requiredUptime) {
         this.network = network;
         this.requiredUptime = requiredUptime;
+        this.setupComponents = new SetupComponents().getSetupComponent();
 
-        if(network.CalculateUptime() > 99.985){
+        random = new Random();
 
-            //Run the scope for all the given tries
-            for(int i = 0; i < 100000; i++){
-                optimizeConfig = new Network("Network");
 
-                for(int x = 0; x <= 40; x++){
-                    Component comp = setuoComponents.get(random.nextInt(setuoComponents.size()));
-                    config.addComponent(comp);
-                }
+        for (int i = 0; i < 1000; i++) {
+            optimizeConfig = new Network("Network");
 
-                //Calculate uptime beforehand so you don't make the same calculation twice
-                double configUpt = optimizeConfig.CalculateUptime();
-
-                //Check if the new configuration is better than the previous best config
-                if(network == null){
-                    this.network = optimizeConfig;
-                }else if(configUpt > requiredUptime){
-                    if(network.CalculatePrice() > optimizeConfig.CalculatePrice()){
-                        this.network = optimizeConfig;
-                    }
-                }else if(network.CalculateUptime() < configUpt){
-                    this.network = optimizeConfig;
-                }
-
+            for (int x = 0; x <= random.nextInt(30); x++) {
+                Component comp = setupComponents.get(random.nextInt(setupComponents.size()));
+                network.addComponent(comp);
             }
 
-        }else{
+            double configUptime = optimizeConfig.CalculateUptime();
 
-
+            if(network == null){
+                this.network = optimizeConfig;
+            }else if (configUptime > requiredUptime) {
+                if (network.CalculatePrice() > optimizeConfig.CalculatePrice()) {
+                    this.network = optimizeConfig;
+                }
+            } else if (network.CalculateUptime() < configUptime) {
+                this.network = optimizeConfig;
+            }
 
         }
 
