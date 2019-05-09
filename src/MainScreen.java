@@ -114,6 +114,10 @@ public class MainScreen extends JFrame implements ActionListener {
         public void menuSelected(MenuEvent e) {
             if (e.getSource() == menuBerekening) {
                 System.out.println("Berekening menu");
+            } else if (e.getSource() == menuOptimaliseer) {
+                System.out.println("Optimaliseer menu");
+            } else if (e.getSource() == menuOpslaan) {
+                System.out.println("Opslaan menu");
             } else {
                 System.out.println("menuSelected");
             }
