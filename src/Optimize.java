@@ -18,7 +18,7 @@ public class Optimize {
         random = new Random();
 
         for (int i = 0; i < 2000000; i++) {
-            randomInt = ThreadLocalRandom.current().nextInt(8, 40 + 1);
+            randomInt = ThreadLocalRandom.current().nextInt(8, 25 + 1);
             optimizeConfig = new Network("Network");
 
             for (int x = 0; x <= randomInt; x++) {
@@ -28,12 +28,14 @@ public class Optimize {
 
             double configUptime = optimizeConfig.CalculateUptime();
 
-            if (configUptime >= 99.985) {
-                if (configUptime > requiredUptime) {
-                    if (network.CalculatePrice() > optimizeConfig.CalculatePrice()) {
-                        this.network = optimizeConfig;
-                    }
-                } else if (network.CalculateUptime() < requiredUptime) {
+            if (network == null) {
+                this.network = optimizeConfig;
+            } else if (configUptime > requiredUptime) {
+                if (network.CalculatePrice() > optimizeConfig.CalculatePrice() || network.CalculateUptime() < configUptime) {
+                    this.network = optimizeConfig;
+                }
+            } else if (network.CalculateUptime() < configUptime) {
+                if (configUptime >= requiredUptime) {
                     this.network = optimizeConfig;
                 }
             }

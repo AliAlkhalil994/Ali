@@ -13,15 +13,7 @@ public class Main {
         System.out.println(network.CalculateUptime());
         System.out.println(network.CalculatePrice());
 
-        Optimize optimized = new Optimize(network,99.99);
-        network = optimized.getNetwork();
-
-        System.out.println("-------------------------");
-
-        System.out.println(network.CalculateUptime());
-        System.out.println(network.CalculatePrice());
-
-        System.out.println(network.getNetwork().size());
+        MainScreen screen = new MainScreen(network);
 
     }
 }
