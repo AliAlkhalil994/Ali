@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class Network {
 
@@ -25,11 +26,7 @@ public class Network {
 
         for (Component c : network) {
 
-            if (c.getType().equals("wbs") || c.getType().equals("dbs")) {
-
-                maxPrice += c.getPrice();
-
-            }
+            maxPrice += c.getPrice();
 
         }
 
@@ -44,20 +41,20 @@ public class Network {
         for (Component c : network) {
 
             if (c.getType().equals("wbs")) {
-                uptimeWebservers = uptimeWebservers*(1- c.getUptime()/100);
+                uptimeWebservers = uptimeWebservers * (1 - c.getUptime() / 100);
             } else if (c.getType().equals("dbs")) {
-                uptimeDBservers = uptimeDBservers*(1- c.getUptime()/100);
+                uptimeDBservers = uptimeDBservers * (1 - c.getUptime() / 100);
             }
 
         }
 
-        uptimeWebservers = 1-uptimeWebservers;
-        uptimeDBservers = 1-uptimeDBservers;
+        uptimeWebservers = 1 - uptimeWebservers;
+        uptimeDBservers = 1 - uptimeDBservers;
 
-        uptimeWebservers = uptimeWebservers*(new Component("pfSense", "firewall", 99.999, 2000)).getUptime()/100;
-        uptimeDBservers = uptimeDBservers*(new Component("DBloadbalancer", "DBloadbalancer", 99.999, 2000)).getUptime()/100;
+        uptimeWebservers = uptimeWebservers * (new Component("pfSense", "firewall", 99.999, 2000)).getUptime() / 100;
+        uptimeDBservers = uptimeDBservers * (new Component("DBloadbalancer", "DBloadbalancer", 99.999, 2000)).getUptime() / 100;
 
-        return uptimeWebservers*uptimeDBservers*100;
+        return uptimeWebservers * uptimeDBservers * 100;
     }
 
     public ArrayList<Component> getNetwork() {
