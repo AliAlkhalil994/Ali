@@ -38,38 +38,26 @@ public class Network {
 
     public double CalculateUptime() {
 
-        double uptime = 1;
+        double uptimeWebservers = 1;
+        double uptimeDBservers = 1;
 
         for (Component c : network) {
 
             if (c.getType().equals("wbs")) {
-
+                uptimeWebservers = uptimeWebservers*(1- c.getUptime()/100);
             } else if (c.getType().equals("dbs")) {
-
+                uptimeDBservers = uptimeDBservers*(1- c.getUptime()/100);
             }
 
         }
 
-        return uptime;
-    }
+        uptimeWebservers = 1-uptimeWebservers;
+        uptimeDBservers = 1-uptimeDBservers;
 
-    public double CalculateUptime(String type) {
+        uptimeWebservers = uptimeWebservers*(new Component("pfSense", "firewall", 99.999, 2000)).getUptime()/100;
+        uptimeDBservers = uptimeDBservers*(new Component("DBloadbalancer", "DBloadbalancer", 99.999, 2000)).getUptime()/100;
 
-        double uptime = 1;
-
-        for (Component c : network) {
-
-            if (c.getType().equals("wbs")) {
-
-
-
-            } else if (c.getType().equals("dbs")) {
-
-            }
-
-        }
-
-        return uptime;
+        return uptimeWebservers*uptimeDBservers*100;
     }
 
     public ArrayList<Component> getNetwork() {
